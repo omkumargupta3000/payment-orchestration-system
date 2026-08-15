@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Orchestration & Transaction Routing System</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Payment Orchestration & Transaction Routing System</h1>
+    <p class="subtitle">
+      A simulated payment orchestration layer that routes transactions across
+      multiple PSPs, with retries and idempotency. No real payments are processed.
+    </p>
+  </header>
+
+  <main>
+    <!-- Summary cards -->
+    <section id="summary-cards" class="card-grid">
+      <div class="card">
+        <span class="card-label">Total Transactions</span>
+        <span class="card-value" id="stat-total">-</span>
+      </div>
+      <div class="card">
+        <span class="card-label">Successful</span>
+        <span class="card-value success" id="stat-success">-</span>
+      </div>
+      <div class="card">
+        <span class="card-label">Failed</span>
+        <span class="card-value failed" id="stat-failed">-</span>
+      </div>
+      <div class="card">
+        <span class="card-label">Success Rate</span>
+        <span class="card-value" id="stat-rate">-</span>
+      </div>
+      <div class="card">
+        <span class="card-label">Amount Processed</span>
+        <span class="card-value" id="stat-amount">-</span>
+      </div>
+      <div class="card">
+        <span class="card-label">Avg Processing Time</span>
+        <span class="card-value" id="stat-latency">-</span>
+      </div>
+    </section>
+
+    <div class="two-column">
+      <!-- Payment form -->
+      <section class="panel">
+        <h2>Process a Payment</h2>
+        <form id="payment-form">
+          <label>Customer ID
+            <input type="text" id="customer_id" value="CUST101" required />
+          </label>
+          <label>Order ID
+            <input type="text" id="order_id" required />
+          </label>
+          <label>Amount
+            <input type="number" id="amount" step="0.01" min="0.01" value="1499" required />
+          </label>
+          <label>Currency
+            <select id="currency">
+              <option value="INR">INR</option>
+              <option value="USD">USD</option>
+            </select>
+          </label>
+          <label>Payment Method
+            <select id="payment_method">
+              <option value="UPI">UPI</option>
+              <option value="CARD">CARD</option>
+              <option value="NETBANKING">NETBANKING</option>
+              <option value="WALLET">WALLET</option>
+            </select>
+          </label>
+          <label>Idempotency Key
+            <input type="text" id="idempotency_key" required />
+            <button type="button" id="generate-key-btn" class="small-btn">Generate</button>
+          </label>
+          <button type="submit" id="submit-btn">Process Payment</button>
+        </form>
+
+        <div id="payment-result" class="result-box hidden"></div>
+      </section>
+
+      <!-- PSP config / demo panel -->
+      <section class="panel">
+        <h2>PSP Configuration (Demo Controls)</h2>
+        <p class="hint">
+          Tweak these to demonstrate retry behaviour or routing decisions -
+          e.g. deactivate a PSP, or lower a PSP's success rate.
+        </p>
+        <div id="psp-config-list"></div>
+      </section>
+    </div>
+
+    <!-- PSP performance -->
+    <section class="panel">
+      <h2>PSP Performance</h2>
+      <div id="psp-performance" class="card-grid"></div>
+    </section>
+
+    <!-- Transaction history -->
+    <section class="panel">
+      <div class="panel-header">
+        <h2>Transaction History</h2>
+        <div class="filters">
+          <select id="filter-status">
+            <option value="">All Statuses</option>
+            <option value="SUCCESS">SUCCESS</option>
+            <option value="FAILED">FAILED</option>
+            <option value="PROCESSING">PROCESSING</option>
+            <option value="RETRYING">RETRYING</option>
+            <option value="CREATED">CREATED</option>
+          </select>
+          <button id="refresh-btn" class="small-btn">Refresh</button>
+        </div>
+      </div>
+      <table id="transactions-table">
+        <thead>
+          <tr>
+            <th>Transaction ID</th>
+            <th>Order ID</th>
+            <th>Amount</th>
+            <th>PSP</th>
+            <th>Status</th>
+            <th>Retries</th>
+            <th>Created At</th>
+          </tr>
+        </thead>
+        <tbody id="transactions-body"></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>Student project - simulation only. No real payment gateways involved.</p>
+  </footer>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,261 @@
+:root {
+  --bg: #f4f5f7;
+  --panel-bg: #ffffff;
+  --border: #dfe3e8;
+  --text: #202124;
+  --text-muted: #5f6368;
+  --primary: #2b59c3;
+  --success: #1e8e3e;
+  --failed: #d93025;
+  --pending: #b06000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+header {
+  background: var(--panel-bg);
+  border-bottom: 1px solid var(--border);
+  padding: 20px 32px;
+}
+
+header h1 {
+  margin: 0 0 4px 0;
+  font-size: 22px;
+}
+
+.subtitle {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  max-width: 800px;
+}
+
+main {
+  padding: 24px 32px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.card {
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.card-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.card-value {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.card-value.success {
+  color: var(--success);
+}
+
+.card-value.failed {
+  color: var(--failed);
+}
+
+.two-column {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 800px) {
+  .two-column {
+    grid-template-columns: 1fr;
+  }
+}
+
+.panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 18px 20px;
+  margin-bottom: 24px;
+}
+
+.panel h2 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hint {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-top: -4px;
+}
+
+form label {
+  display: block;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+}
+
+form input,
+form select {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 7px 9px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+#submit-btn {
+  background: var(--primary);
+  color: white;
+  padding: 9px 18px;
+  margin-top: 6px;
+}
+
+#submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.small-btn {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 5px 10px;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.result-box {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  font-size: 13px;
+  background: #fafafa;
+}
+
+.result-box.hidden {
+  display: none;
+}
+
+.result-box .row {
+  display: flex;
+  justify-content: space-between;
+  padding: 3px 0;
+}
+
+.psp-config-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 14px;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.psp-config-row:last-child {
+  border-bottom: none;
+}
+
+.psp-config-row .psp-name {
+  font-weight: 600;
+  min-width: 100px;
+}
+
+.psp-config-row input[type="number"] {
+  width: 70px;
+  padding: 4px 6px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  margin-top: 12px;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.status-badge {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.status-SUCCESS {
+  background: #e6f4ea;
+  color: var(--success);
+}
+
+.status-FAILED {
+  background: #fce8e6;
+  color: var(--failed);
+}
+
+.status-PROCESSING, .status-RETRYING, .status-CREATED {
+  background: #fef7e0;
+  color: var(--pending);
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-muted);
+  font-size: 12px;
+}
