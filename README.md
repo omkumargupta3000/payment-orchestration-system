@@ -217,16 +217,6 @@ pytest -v
 Tests cover payment creation, idempotency (duplicate key handling), PSP
 routing/scoring, and retry behaviour on failure.
 
-## Deployment (Render)
-
-1. Push this repo to GitHub.
-2. On Render, create a new **Web Service** and point it at the repo.
-3. Render will pick up `render.yaml` automatically, or you can set manually:
-   - **Build command:** `pip install -r requirements.txt`
-   - **Start command:** `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-4. Once deployed, the dashboard is available directly at the Render URL -
-   there's no separate frontend deployment needed since FastAPI serves the
-   static files itself.
 
 ## Demo Scenarios
 
@@ -258,14 +248,3 @@ routing/scoring, and retry behaviour on failure.
 
 Remember to reset the PSPs back to their default values (success rate,
 latency, active) after the demo via the same panel.
-
-## Demo
-
-Live Demo: [ADD DEPLOYED LINK]
-
-GitHub: [ADD GITHUB LINK]
-
----
-
-See `INTERVIEW_PREP.md` for a component-by-component explanation of the
-project and a list of interview questions with answers.
